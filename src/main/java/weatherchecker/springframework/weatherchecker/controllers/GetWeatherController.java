@@ -11,16 +11,18 @@ import java.util.List;
 
 public class GetWeatherController {
 
-    public Object updateWeather(List<location> _Location) {
+    public void updateWeather(List<location> _Location) {
 
         for (location ThisLoc:_Location) {
             WeatherAPI.Root API = getEmployees(ThisLoc.getCityName());
 
-            String ReqDate = ThisLoc.getreqdate().toString().substring(0,9);
-            //gotta find day of the year?
-            ThisLoc.setTemperature("test");
-            ThisLoc.setClouds();
-            ThisLoc.setCountryName();
+            long DateDiff = DateDiffrence(ThisLoc.getCurDate(),ThisLoc.getreqdate());
+
+            System.out.println("DateDiff:" + DateDiff);
+
+//            ThisLoc.setTemperature("test");
+//            ThisLoc.setClouds();
+//            ThisLoc.setCountryName();
         }
     }
 
@@ -43,5 +45,10 @@ public class GetWeatherController {
         }
 
         return API;
+    }
+
+    public static long DateDiffrence(Date currDate, Date reqDate)
+    {
+        return currDate.getTime() - reqDate.getTime();
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class WeatherAPI {
 
     @JsonDeserialize(as = Main.class)
-    public class Main{
+    public static class Main{
         public double temp;
         public double feels_like;
         public double temp_min;
@@ -21,7 +21,7 @@ public class WeatherAPI {
     }
 
     @JsonDeserialize(as = Weather.class)
-    public class Weather{
+    public static class Weather{
         public int id;
         public String main;
         public String description;
@@ -29,30 +29,30 @@ public class WeatherAPI {
     }
 
     @JsonDeserialize(as = Clouds.class)
-    public class Clouds{
+    public static class Clouds{
         public int all;
     }
 
     @JsonDeserialize(as = Wind.class)
-    public class Wind{
+    public static class Wind{
         public double speed;
         public int deg;
         public double gust;
     }
 
     @JsonDeserialize(as = Sys.class)
-    public class Sys{
+    public static class Sys{
         public String pod;
     }
 
     @JsonDeserialize(as = Rain.class)
-    public class Rain{
+    public static class Rain{
         @JsonProperty("3h")
         public double _3h;
     }
 
     @JsonDeserialize(as = list.class)
-    public class list{
+    public static class list{
         public int dt;
         public Main main;
         public List<Weather> weather;
@@ -66,13 +66,13 @@ public class WeatherAPI {
     }
 
     @JsonDeserialize(as = Coord.class)
-    public class Coord{
+    public static class Coord{
         public double lat;
         public double lon;
     }
 
     @JsonDeserialize(as = City.class)
-    public class City{
+    public static class City{
         public int id;
         public String name;
         public Coord coord;
@@ -85,7 +85,7 @@ public class WeatherAPI {
 
 //    @JsonRootName(value = "Root")
     @JsonDeserialize(as = Root.class)
-    public class Root{
+    public static class Root{
         public String cod;
         public int message;
         public int cnt;

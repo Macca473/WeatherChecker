@@ -36,7 +36,7 @@ public class locationController {
 
         List<location> Location = LocationRepository.findByusernameContaining(username);
 
-
+        GetWeatherController.updateWeather(Location);
 
         return Location;
     }
