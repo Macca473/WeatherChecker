@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import weatherchecker.springframework.weatherchecker.models.WeatherAPI;
 import weatherchecker.springframework.weatherchecker.models.location;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 public class GetWeatherController {
@@ -47,8 +47,8 @@ public class GetWeatherController {
         return API;
     }
 
-    public static long DateDiffrence(Date currDate, Date reqDate)
+    public static long DateDiffrence(Calendar currDate, Calendar reqDate)
     {
-        return currDate.getTime() - reqDate.getTime();
+        return currDate.get(Calendar.DATE) - reqDate.get(Calendar.DATE);
     }
 }

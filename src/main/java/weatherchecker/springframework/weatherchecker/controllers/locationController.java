@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import weatherchecker.springframework.weatherchecker.models.location;
 import weatherchecker.springframework.weatherchecker.repositories.locationRepository;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -46,13 +46,14 @@ public class locationController {
 
         location LocLocation = new location(
                 _location.getusername(),
-                new Date(),
-                new Date(),
+                Calendar.getInstance(),
+//                ConvToDate(_location.getreqdate()),
+                _location.getreqdate(),
                 _location.getCityName(),
-                _location.getCityCode(),
+                new String("CITYCODENULL"),
                 _location.getCountryName(),
-                _location.getTemperature(),
-                _location.getClouds()
+                new String("TEMPNULL"),
+                new String("CLOUDSNULL")
         );
 
         _location = LocationRepository.save(LocLocation);
@@ -61,5 +62,9 @@ public class locationController {
 
         return new ResponseEntity<>(_location, HttpStatus.CREATED);
     }
+
+//    private Calendar ConvToDate(String getreqdate) {
+//
+//    }
 
 }

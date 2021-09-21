@@ -1,7 +1,7 @@
 package weatherchecker.springframework.weatherchecker.models;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "location")
@@ -12,8 +12,8 @@ public class location {
     private Long id;
 
     private String username;
-    private Date CurDate;
-    private Date reqdate;
+    private Calendar CurDate;
+    private Calendar reqdate;
     private String CityName;
     private String CityCode;
     private String CountryName;
@@ -38,19 +38,17 @@ public class location {
         username = username;
     }
 
-    public Date getCurDate() {
+    public Calendar getCurDate() {
         return CurDate;
     }
 
-    public void setCurDate(Date curDate) {
-        CurDate = curDate;
-    }
+    public void setCurDate(Calendar curDate) { CurDate = curDate; }
 
-    public Date getreqdate() {
+    public Calendar getreqdate() {
         return reqdate;
     }
 
-    public void setreqdate(Date reqdate) {
+    public void setreqdate(Calendar reqdate) {
         reqdate = reqdate;
     }
 
@@ -113,7 +111,7 @@ public class location {
     public location() {
     }
 
-    public location(String username, Date CurDate, Date reqdate, String CityName, String CityCode, String CountryName, String Temperature, String Clouds) {
+    public location(String username, Calendar CurDate, Calendar reqdate, String CityName, String CityCode, String CountryName, String Temperature, String Clouds) {
         this.username = username;
         this.CurDate = CurDate;
         this.reqdate = reqdate;
