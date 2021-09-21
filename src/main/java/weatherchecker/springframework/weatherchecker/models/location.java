@@ -3,6 +3,8 @@ package weatherchecker.springframework.weatherchecker.models;
 import javax.persistence.*;
 import java.util.Calendar;
 
+import static java.lang.Integer.parseInt;
+
 @Entity
 @Table(name = "location")
 public class location {
@@ -44,12 +46,42 @@ public class location {
 
     public void setCurDate(Calendar curDate) { CurDate = curDate; }
 
-    public Calendar getreqdate() {
+    public Calendar getreqdateCal() {
         return reqdate;
     }
 
-    public void setreqdate(Calendar reqdate) {
-        reqdate = reqdate;
+    public Calendar getreqdateStr(String _reqdate) {
+
+        String[] datevalues = _reqdate.split("-", 2);
+
+        Calendar Cal = Calendar.getInstance();
+
+        Cal.set(Calendar.DATE, parseInt(datevalues[0]));
+
+        Cal.set(Calendar.MONTH, parseInt(datevalues[1]));
+
+        Cal.set(Calendar.YEAR, parseInt(datevalues[2]));
+
+        return Cal;
+    }
+
+    public void setreqdateCal(Calendar _reqdate) {
+        reqdate = _reqdate;
+    }
+
+    public void setreqdateStr(String _reqdate) {
+
+        String[] datevalues = _reqdate.split("-", 2);
+
+        Calendar Cal = Calendar.getInstance();
+
+        Cal.set(Calendar.DATE, parseInt(datevalues[0]));
+
+        Cal.set(Calendar.MONTH, parseInt(datevalues[1]));
+
+        Cal.set(Calendar.YEAR, parseInt(datevalues[2]));
+
+        reqdate = Cal;
     }
 
     public String getCityName() {

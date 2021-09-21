@@ -47,8 +47,7 @@ public class locationController {
         location LocLocation = new location(
                 _location.getusername(),
                 Calendar.getInstance(),
-//                ConvToDate(_location.getreqdate()),
-                _location.getreqdate(),
+                _location.getreqdateStr(),
                 _location.getCityName(),
                 new String("CITYCODENULL"),
                 _location.getCountryName(),
@@ -62,9 +61,5 @@ public class locationController {
 
         return new ResponseEntity<>(_location, HttpStatus.CREATED);
     }
-
-//    private Calendar ConvToDate(String getreqdate) {
-//
-//    }
 
 }

@@ -16,7 +16,7 @@ public class GetWeatherController {
         for (location ThisLoc:_Location) {
             WeatherAPI.Root API = getEmployees(ThisLoc.getCityName());
 
-            long DateDiff = DateDiffrence(ThisLoc.getCurDate(),ThisLoc.getreqdate());
+            long DateDiff = DateDiffrence(ThisLoc.getCurDate(),ThisLoc.getreqdateCal());
 
             System.out.println("DateDiff:" + DateDiff);
 
