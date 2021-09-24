@@ -9,6 +9,8 @@ import weatherchecker.springframework.weatherchecker.models.location;
 import java.util.Calendar;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class GetWeatherController {
 
     public void updateWeather(List<location> _Location) {
@@ -16,9 +18,9 @@ public class GetWeatherController {
         for (location ThisLoc:_Location) {
             WeatherAPI.Root API = getEmployees(ThisLoc.getCityName());
 
-            long DateDiff = DateDiffrence(ThisLoc.getCurDate(),ThisLoc.getreqdateCal());
+//            long DateDiff = DateDiffrence(ThisLoc.getCurDate(),ThisLoc.getreqdateCal());
 
-            System.out.println("DateDiff:" + DateDiff);
+//            System.out.println("DateDiff:" + DateDiff);
 
 //            ThisLoc.setTemperature("test");
 //            ThisLoc.setClouds();
@@ -49,6 +51,21 @@ public class GetWeatherController {
 
     public static long DateDiffrence(Calendar currDate, Calendar reqDate)
     {
-        return currDate.get(Calendar.DATE) - reqDate.get(Calendar.DATE);
+        return currDate.get(Calendar.DAY_OF_YEAR) - reqDate.get(Calendar.DATE);
+    }
+
+    public Calendar StringToCalendar(String StrDate) {
+
+        String[] datevalues = StrDate.split("-", 2);
+
+        Calendar Cal = Calendar.getInstance();
+
+        Cal.set(Calendar.DAY_OF_MONTH, parseInt(datevalues[0]));
+
+        Cal.set(Calendar.MONTH, parseInt(datevalues[1]));
+
+        Cal.set(Calendar.YEAR, parseInt(datevalues[2]));
+
+        return Cal;
     }
 }

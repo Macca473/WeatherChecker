@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import weatherchecker.springframework.weatherchecker.models.location;
 import weatherchecker.springframework.weatherchecker.repositories.locationRepository;
 
-import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -19,12 +18,14 @@ public class locationController {
         LocationRepository = locationRepository;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/AllLocations")
     List<location> allLocations() {
         return LocationRepository.findAll();
     }
 
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/LocationsByUserName/{username}")
     List<location> getlocationbyusername(@PathVariable String username) {
 
@@ -41,13 +42,14 @@ public class locationController {
         return Location;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/PostLocations")
     public ResponseEntity<location> createlocation(@RequestBody location _location) {
 
         location LocLocation = new location(
                 _location.getusername(),
-                Calendar.getInstance(),
-                _location.getreqdateStr(),
+                new String("CURRTEMNULL"),
+                _location.getreqdate(),
                 _location.getCityName(),
                 new String("CITYCODENULL"),
                 _location.getCountryName(),
@@ -59,7 +61,7 @@ public class locationController {
 
         LocationRepository.save(LocLocation);
 
-        return new ResponseEntity<>(_location, HttpStatus.CREATED);
+        return new ResponseEntity<>(LocLocation, HttpStatus.CREATED);
     }
 
 }

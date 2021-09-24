@@ -1,9 +1,6 @@
 package weatherchecker.springframework.weatherchecker.models;
 
 import javax.persistence.*;
-import java.util.Calendar;
-
-import static java.lang.Integer.parseInt;
 
 @Entity
 @Table(name = "location")
@@ -14,8 +11,8 @@ public class location {
     private Long id;
 
     private String username;
-    private Calendar CurDate;
-    private Calendar reqdate;
+    private String CurDate;
+    private String reqdate;
     private String CityName;
     private String CityCode;
     private String CountryName;
@@ -36,52 +33,22 @@ public class location {
         return username;
     }
 
-    public void setusername(String username) {
-        username = username;
+    public void setusername(String _username) {
+        username = _username;
     }
 
-    public Calendar getCurDate() {
+    public String getCurDate() {
         return CurDate;
     }
 
-    public void setCurDate(Calendar curDate) { CurDate = curDate; }
+    public void setCurDate(String curDate) { CurDate = curDate; }
 
-    public Calendar getreqdateCal() {
+    public String getreqdate() {
         return reqdate;
     }
 
-    public Calendar getreqdateStr(String _reqdate) {
-
-        String[] datevalues = _reqdate.split("-", 2);
-
-        Calendar Cal = Calendar.getInstance();
-
-        Cal.set(Calendar.DATE, parseInt(datevalues[0]));
-
-        Cal.set(Calendar.MONTH, parseInt(datevalues[1]));
-
-        Cal.set(Calendar.YEAR, parseInt(datevalues[2]));
-
-        return Cal;
-    }
-
-    public void setreqdateCal(Calendar _reqdate) {
+    public void setreqdate(String _reqdate) {
         reqdate = _reqdate;
-    }
-
-    public void setreqdateStr(String _reqdate) {
-
-        String[] datevalues = _reqdate.split("-", 2);
-
-        Calendar Cal = Calendar.getInstance();
-
-        Cal.set(Calendar.DATE, parseInt(datevalues[0]));
-
-        Cal.set(Calendar.MONTH, parseInt(datevalues[1]));
-
-        Cal.set(Calendar.YEAR, parseInt(datevalues[2]));
-
-        reqdate = Cal;
     }
 
     public String getCityName() {
@@ -143,7 +110,7 @@ public class location {
     public location() {
     }
 
-    public location(String username, Calendar CurDate, Calendar reqdate, String CityName, String CityCode, String CountryName, String Temperature, String Clouds) {
+    public location(String username, String CurDate, String reqdate, String CityName, String CityCode, String CountryName, String Temperature, String Clouds) {
         this.username = username;
         this.CurDate = CurDate;
         this.reqdate = reqdate;
@@ -153,17 +120,6 @@ public class location {
         this.Temperature = Temperature;
         this.Clouds = Clouds;
     }
-
-//    public class updateweather() {
-//    }
-//
-//    public updateloc(Long id, String CountryName, String Temperature, String Clouds) {
-//        this.id = id;
-//        this.CountryName = CountryName;
-//        this.Temperature = Temperature;
-//        this.Clouds = Clouds;
-//    }
-
 
     @Override
     public boolean equals(Object o) {
