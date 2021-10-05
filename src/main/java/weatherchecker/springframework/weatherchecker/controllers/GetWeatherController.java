@@ -8,6 +8,7 @@ import weatherchecker.springframework.weatherchecker.models.location;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Integer.parseInt;
 
@@ -15,20 +16,27 @@ public class GetWeatherController {
 
     public void updateWeather(List<location> _Location) {
 
+        System.out.println("updating weather");
+
         for (location ThisLoc:_Location) {
-            WeatherAPI.Root API = getEmployees(ThisLoc.getCityName());
+            WeatherAPI.Root API = getWeather(ThisLoc.getCityName());
 
-//            long DateDiff = DateDiffrence(ThisLoc.getCurDate(),ThisLoc.getreqdateCal());
+            System.out.println("CurrDate: " + ThisLoc.getCurDate() + "| ReqDate: " + ThisLoc.getreqdate());
 
-//            System.out.println("DateDiff:" + DateDiff);
+            int DateDiff = DateDiffrence(ThisLoc.getCurDate(),ThisLoc.getreqdate());
 
-//            ThisLoc.setTemperature("test");
-//            ThisLoc.setClouds();
-//            ThisLoc.setCountryName();
+            System.out.println("DateDiff: " + DateDiff);
+
+            WeatherAPI.list Thisinfo = API.list[(DateDiff * 8) - 4];
+
+            ThisLoc.setTemperature("" + Thisinfo.main.temp);
+            ThisLoc.setClouds("" + Thisinfo.clouds.all);
+
+            ThisLoc.setCountryName(API.city.country);
         }
     }
 
-    public WeatherAPI.Root getEmployees(String cityname) {
+    public WeatherAPI.Root getWeather(String cityname) {
 
         String apiKey = "1566020c66651f6712fd865503112dec";
 
@@ -49,14 +57,9 @@ public class GetWeatherController {
         return API;
     }
 
-    public static long DateDiffrence(Calendar currDate, Calendar reqDate)
-    {
-        return currDate.get(Calendar.DAY_OF_YEAR) - reqDate.get(Calendar.DATE);
-    }
-
     public Calendar StringToCalendar(String StrDate) {
 
-        String[] datevalues = StrDate.split("-", 2);
+        String[] datevalues = StrDate.split("-", 3);
 
         Calendar Cal = Calendar.getInstance();
 
@@ -67,5 +70,16 @@ public class GetWeatherController {
         Cal.set(Calendar.YEAR, parseInt(datevalues[2]));
 
         return Cal;
+    }
+
+        public int DateDiffrence(String currDate, String reqDate)
+    {
+        long CurCAL = StringToCalendar(currDate).getTimeInMillis();
+
+        long ReqCAL = StringToCalendar(reqDate).getTimeInMillis();
+
+        long millDiff = ReqCAL - CurCAL;
+
+        return (int)TimeUnit.MILLISECONDS.toDays(millDiff);
     }
 }

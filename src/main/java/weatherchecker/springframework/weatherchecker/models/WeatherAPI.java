@@ -2,7 +2,6 @@ package weatherchecker.springframework.weatherchecker.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.List;
 
 
 public class WeatherAPI {
@@ -55,7 +54,7 @@ public class WeatherAPI {
     public static class list{
         public int dt;
         public Main main;
-        public List<Weather> weather;
+        public Weather[] weather;
         public Clouds clouds;
         public Wind wind;
         public int visibility;
@@ -89,7 +88,7 @@ public class WeatherAPI {
         public String cod;
         public int message;
         public int cnt;
-        public List<list> list;
+        public list[] list;
         public City city;
     }
 

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import weatherchecker.springframework.weatherchecker.models.location;
 import weatherchecker.springframework.weatherchecker.repositories.locationRepository;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,7 +35,7 @@ public class locationController {
 
         GetWeatherController GetWeatherController = new GetWeatherController();
 
-        GetWeatherController.getEmployees("London");
+        GetWeatherController.getWeather("London");
 
         List<location> Location = LocationRepository.findByusernameContaining(username);
 
@@ -48,7 +50,7 @@ public class locationController {
 
         location LocLocation = new location(
                 _location.getusername(),
-                new String("CURRTEMNULL"),
+                new String(GetCurrDateString()),
                 _location.getreqdate(),
                 _location.getCityName(),
                 new String("CITYCODENULL"),
@@ -62,6 +64,14 @@ public class locationController {
         LocationRepository.save(LocLocation);
 
         return new ResponseEntity<>(LocLocation, HttpStatus.CREATED);
+    }
+
+    private String GetCurrDateString() {
+        System.out.println("Getting Current Date");
+
+        SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date(System.currentTimeMillis());
+        return formatter.format(date).toString();
     }
 
 }
